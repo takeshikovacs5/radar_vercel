@@ -1,0 +1,221 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #28252C;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+*{margin:0; box-sizing:border-box;}
+
+.container {
+    background-color: #121212;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-left: 0;
+    margin-right: 0;
+    overflow: hidden; /* Prevent unexpected layout shifts */
+    max-width: 100%; /* Adjust as needed */
+    margin: 0 auto;  /* Center the container */
+}
+
+form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 20px;
+    z-index: 1;
+}
+
+h1 {
+    color: white;
+}
+
+select,
+input[type="radio"] {
+    margin: 5px;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"] + label {
+    display: inline-block;
+    padding: 6px;
+    margin: 5px;
+    background-color: #009A57;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.5s ease, color 0.5s ease; /* Added color transition */
+}
+
+input[type="radio"]:checked + label {
+    background-color: transparent;
+    color: #009A57;
+    border: 1px solid #009A57;
+    border-radius: 5px;
+}
+
+input[type="radio"]:hover + label:hover {
+    background-color: #103023;
+    color: #29a372;
+    transition: background-color 0.5s ease, color 0.5s ease; /* Added color transition */
+}
+
+
+.radio-group {
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 0;
+    margin-left: 0; /* Add this line to reset left margin */
+}
+
+.radio-group label {
+    margin-left: 0; /* Add this line to create space between radio button and label */
+}
+
+.select-group {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.radio-group input[type="radio"]:focus {
+    outline: none;
+}
+
+select {
+    width: 200px;
+    padding: 8px;
+    font-size: 14px;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+}
+
+select::-webkit-select-placeholder {
+    color: #777;
+}
+
+select:-moz-placeholder {
+    color: #777;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+#loadingSpinner {
+    display: none;
+    margin-top: 20px;
+}
+
+/* Add or modify the following styles in your CSS */
+
+#chartContainer {
+    margin-right: 0;
+    max-width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    text-align: center; /*Set maximum width to the viewport width */
+    overflow: hidden; /* Hide any content that overflows */
+}
+
+#chartImage {
+    display: block;
+    margin: 0 auto; /* Center the chart horizontally */
+    max-width: 100%;
+    height: auto;/* Ensure the image doesn't overflow vertically */
+    cursor: pointer; /* Add a pointer cursor to indicate clickability */
+    position: absolute;
+    right: 0; left: 0;
+}
+
+.submit_button{
+    margin-top: 20px;
+}
+
+.select-group{
+    margin-top: 20px;
+}
+
+/* Styles for the submit button */
+input[type="submit"] {
+    background-color: #009A57;
+    color: #fff;
+    padding: 10px;
+    border: 2px solid #009A57;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Poppins';
+    font-size: 16px;
+    font-weight: 450;
+    line-height: 16px;
+    letter-spacing: 1px;
+    min-height: 40px;
+    outline: none; /* Add this line to remove focus outline */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Added color and border transition */
+    position: relative; /* Set position to relative */
+    z-index: 1;
+}
+
+input[type="submit"]:hover {
+    background-color: initial;
+    color: #009A57;
+    border-color: #009A57;
+    transition-duration: 0.6s;
+}
+
+input[type="submit"]:active {
+    opacity: 0.8;
+}
+
+@media only screen and (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    select,
+    input[type="radio"],
+    input[type="submit"] {
+        font-size: 12px;
+    }
+
+    select {
+        width: 150px;
+        padding: 8px;
+    }
+
+    #chartContainer{
+        position: relative;
+    }
+
+    img {
+        width: 100%;
+   }
+}

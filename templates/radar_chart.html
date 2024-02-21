@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radar Chart</title>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+    <!-- The container for displaying the chart -->
+    <div id="chartContainer">
+        <!-- Chart will be loaded here -->
+        {% if chart_img %}
+            <img src="{{ chart_img }}" alt="Radar Chart">
+        {% endif %}
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // Intercept the form submit
+            $("#chartForm").submit(function (event) {
+                event.preventDefault(); // Prevent the default form submission
+                var formData = $(this).serialize(); // Serialize form data
+
+                // Make an AJAX request to the server
+                $.ajax({
+                    type: 'POST',
+                    url: '/radar_chart',
+                    data: formData,
+                    dataType: 'json', // Expect JSON response
+                    success: function (data) {
+                        // Assuming you have a div with id 'chartContainer' to display the chart
+                        // Check if the response contains the 'chart_html' property
+                        if (data.chart_html) {
+                            $("#chartContainer").html('<img src="' + data.chart_html + '" alt="Radar Chart">');
+                        } else {
+                            console.error('No chart data received.');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('AJAX request failed:', status, error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
