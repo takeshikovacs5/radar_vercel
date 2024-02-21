@@ -191,7 +191,7 @@ def radar_chart():
     )
 
     radar = Radar(background_color="#121212", patch_color="#28252C", label_color="#FFFFFF",
-                    range_color="#FFFFFF", label_fontsize=9.5, range_fontsize=8.5, fontfamily=prop.get_name())
+                    range_color="#FFFFFF", label_fontsize=9.5, range_fontsize=8.5)
     
     
     if selectedposition == 'FW':
