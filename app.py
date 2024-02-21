@@ -15,20 +15,21 @@ from mplsoccer import add_image
 from urllib.request import urlopen
 import matplotlib.font_manager as fm
 
-fpath = "fonts/Poppins/Poppins-Regular.ttf"
-prop = fm.FontProperties(fname=fpath)
+#fpath = "fonts/Poppins/Poppins-Regular.ttf"
+#prop = fm.FontProperties(fname=fpath)
 
-fpath_bold = "fonts/Poppins/Poppins-SemiBold.ttf"
-prop_bold = fm.FontProperties(fname=fpath_bold)
+#fpath_bold = "fonts/Poppins/Poppins-SemiBold.ttf"
+#prop_bold = fm.FontProperties(fname=fpath_bold)
 
-fpath_bold2 = "fonts/Poppins/Poppins-Bold.ttf"
-prop_bold2 = fm.FontProperties(fname=fpath_bold2)
+#fpath_bold2 = "fonts/Poppins/Poppins-Bold.ttf"
+#prop_bold2 = fm.FontProperties(fname=fpath_bold2)
 
-font_dirs = ["fonts/Poppins/Poppins.ttf"]  # The path to the custom font file.
-font_files = fm.findSystemFonts(fontpaths=font_dirs)
+font_path = 'fonts/Poppins/Poppins-Regular.ttf'  # Your font path goes here
+fm.fontManager.addfont(font_path)
+prop = fm.FontProperties(fname=font_path)
 
-for font_file in font_files:
-    fm.fontManager.addfont(font_file)
+plt.rcParams['font.family'] = 'sans-serif'
+plt.rcParams['font.sans-serif'] = prop.get_name()
 
 app = Flask(__name__)
 app.secret_key = "FotMob_Radar"
@@ -179,7 +180,7 @@ def radar_chart():
 
     radar = Radar(background_color="#121212", patch_color="#28252C", label_color="#FFFFFF",
                     range_color="#FFFFFF", label_fontsize=9.5, range_fontsize=8.5,
-                    fontfamily='Poppins')
+                    fontfamily='sans-serif')
     
     
     if selectedposition == 'FW':
