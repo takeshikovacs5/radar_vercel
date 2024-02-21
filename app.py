@@ -24,6 +24,12 @@ prop_bold = fm.FontProperties(fname=fpath_bold)
 fpath_bold2 = "fonts/Poppins/Poppins-Bold.ttf"
 prop_bold2 = fm.FontProperties(fname=fpath_bold2)
 
+font_dirs = ["/fonts"]  # The path to the custom font file.
+font_files = fm.findSystemFonts(fontpaths=font_dirs)
+
+for font_file in font_files:
+    fm.fontManager.addfont(font_file)
+
 app = Flask(__name__)
 app.secret_key = "FotMob_Radar"
 
