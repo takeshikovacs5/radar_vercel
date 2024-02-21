@@ -13,23 +13,10 @@ from PIL import Image
 import requests
 from mplsoccer import add_image
 from urllib.request import urlopen
-import matplotlib.font_manager as fm
+import matplotlib.font_manager as font_manager
 
-#fpath = "fonts/Poppins/Poppins-Regular.ttf"
-#prop = fm.FontProperties(fname=fpath)
-
-#fpath_bold = "fonts/Poppins/Poppins-SemiBold.ttf"
-#prop_bold = fm.FontProperties(fname=fpath_bold)
-
-#fpath_bold2 = "fonts/Poppins/Poppins-Bold.ttf"
-#prop_bold2 = fm.FontProperties(fname=fpath_bold2)
-
-font_path = 'fonts/Poppins/Poppins-Regular.ttf'  # Your font path goes here
-fm.fontManager.addfont(font_path)
-prop = fm.FontProperties(fname=font_path)
-
-plt.rcParams['font.family'] = 'sans-serif'
-plt.rcParams['font.sans-serif'] = prop.get_name()
+font_path = 'fonts\Poppins\Poppins-Regular.ttf'
+prop = font_manager.FontProperties(fname=font_path)
 
 app = Flask(__name__)
 app.secret_key = "FotMob_Radar"
@@ -179,8 +166,7 @@ def radar_chart():
     )
 
     radar = Radar(background_color="#121212", patch_color="#28252C", label_color="#FFFFFF",
-                    range_color="#FFFFFF", label_fontsize=9.5, range_fontsize=8.5,
-                    fontfamily='sans-serif')
+                    range_color="#FFFFFF", label_fontsize=9.5, range_fontsize=8.5, fontfamily=prop.get_name())
     
     
     if selectedposition == 'FW':
