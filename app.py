@@ -12,9 +12,12 @@ from PIL import Image
 from mplsoccer import add_image
 from urllib.request import urlopen
 import matplotlib.font_manager as font_manager
+import os
 
 font_path = 'fonts/Poppins/Poppins-ExtraLight.ttf'
-prop = font_manager.FontProperties(fname=font_path)
+path = os.path.join(matplotlib.get_data_path(), font_path)
+prop = font_manager.FontProperties(fname=path)
+plt.rcParams['font.family'] = prop.get_name()
 
 app = Flask(__name__)
 app.secret_key = "FotMob_Radar"
