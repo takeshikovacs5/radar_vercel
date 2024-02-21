@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for, json
 from flask_wtf import FlaskForm
-from flask_wtf.csrf import CSRFProtect
 from wtforms import SelectField
 import pandas as pd
 from soccerplots.radar_chart import Radar
@@ -10,12 +9,11 @@ matplotlib.use('Agg')
 from io import BytesIO
 import base64
 from PIL import Image
-import requests
 from mplsoccer import add_image
 from urllib.request import urlopen
 import matplotlib.font_manager as font_manager
 
-font_path = 'fonts\Poppins\Poppins-Regular.ttf'
+font_path = 'fonts/Poppins/Poppins-ExtraLight.ttf'
 prop = font_manager.FontProperties(fname=font_path)
 
 app = Flask(__name__)
@@ -124,22 +122,47 @@ def radar_chart():
         takim2 = team2name.iloc[0]
 
     ligsezon = 'Süper Lig | 23/24'
-    endnote = '90 dakika başına düşen verilerdir'
-
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
+    endnote = '@bariscanyeksin\n90 dakika başına düşen verilerdir'
 
     fotmob_df_url = 'https://raw.githubusercontent.com/bariscanyeksin/csv_scatter_radar/main/fotmob_id.csv'
     fotmob_df = pd.read_csv(fotmob_df_url)
     player1_fotmob = fotmob_df.loc[fotmob_df['player_name'] == player1, 'fotmob_id'].values
-    player1_fotmob_id = player1_fotmob[0]
     player2_fotmob = fotmob_df.loc[fotmob_df['player_name'] == player2, 'fotmob_id'].values
-    player2_fotmob_id = player2_fotmob[0]
-    player1_fotmob_photo_url = 'https://images.fotmob.com/image_resources/playerimages/'+str(player1_fotmob_id)+'.png'
-    player2_fotmob_photo_url = 'https://images.fotmob.com/image_resources/playerimages/'+str(player2_fotmob_id)+'.png'
-    r_player1 = urlopen(player1_fotmob_photo_url)
-    r_player2 = urlopen(player2_fotmob_photo_url)
-    player1_foto = Image.open(r_player1)
-    player2_foto = Image.open(r_player2)
+    if (len(player1_fotmob) == 1) & (len(player2_fotmob) == 1):
+        player1_fotmob_id = player1_fotmob[0]
+        player2_fotmob_id = player2_fotmob[0]
+        player1_fotmob_photo_url = 'https://images.fotmob.com/image_resources/playerimages/'+str(player1_fotmob_id)+'.png'
+        player2_fotmob_photo_url = 'https://images.fotmob.com/image_resources/playerimages/'+str(player2_fotmob_id)+'.png'
+        r_player1 = urlopen(player1_fotmob_photo_url)
+        r_player2 = urlopen(player2_fotmob_photo_url)
+        player1_foto = Image.open(r_player1)
+        player2_foto = Image.open(r_player2)
+        
+    elif (len(player1_fotmob) == 0) & (len(player2_fotmob) == 1):
+        player2_fotmob_id = player2_fotmob[0]
+        player1_fotmob_photo_url = 'https://www.fotmob.com/_next/static/media/player_fallback_dark.2f00a83e.png'
+        player2_fotmob_photo_url = 'https://images.fotmob.com/image_resources/playerimages/'+str(player2_fotmob_id)+'.png'
+        r_player1 = urlopen(player1_fotmob_photo_url)
+        r_player2 = urlopen(player2_fotmob_photo_url)
+        player1_foto = Image.open(r_player1)
+        player2_foto = Image.open(r_player2)
+
+    elif (len(player1_fotmob) == 1) & (len(player2_fotmob) == 0):
+        player1_fotmob_id = player1_fotmob[0]
+        player1_fotmob_photo_url = 'https://images.fotmob.com/image_resources/playerimages/'+str(player1_fotmob_id)+'.png'
+        player2_fotmob_photo_url = 'https://www.fotmob.com/_next/static/media/player_fallback_dark.2f00a83e.png'
+        r_player1 = urlopen(player1_fotmob_photo_url)
+        r_player2 = urlopen(player2_fotmob_photo_url)
+        player1_foto = Image.open(r_player1)
+        player2_foto = Image.open(r_player2)
+
+    else:
+        player1_fotmob_photo_url = 'https://www.fotmob.com/_next/static/media/player_fallback_dark.2f00a83e.png'
+        player2_fotmob_photo_url = 'https://www.fotmob.com/_next/static/media/player_fallback_dark.2f00a83e.png'
+        r_player1 = urlopen(player1_fotmob_photo_url)
+        r_player2 = urlopen(player2_fotmob_photo_url)
+        player1_foto = Image.open(r_player1)
+        player2_foto = Image.open(r_player2)
     
     df_filtered = df_filtered.drop(['index', 'team.name', 'team.shortName'], axis=1)
 
@@ -212,4 +235,4 @@ def radar_chart():
     return render_template("radar_chart.html", form=form, chart_img=img_str)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
