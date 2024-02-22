@@ -25,15 +25,6 @@ fontManager.ttflist.append(FontEntry(
     stretch='normal',
     size='scalable')
 )
-fontManager.ttflist.extend(FontEntry(
-    fname=custom_font_path,
-    name='Poppins',
-    style='normal',
-    variant='normal',
-    weight=400,
-    stretch='normal',
-    size='scalable')
-)
 plt.rcParams['font.family'] = 'Poppins'
 
 app = Flask(__name__)
