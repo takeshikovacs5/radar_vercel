@@ -18,12 +18,7 @@ from matplotlib.font_manager import fontManager, FontEntry
 custom_font_path = 'fonts/Poppins/Poppins.ttf'
 fontManager.ttflist.append(FontEntry(
     fname=custom_font_path,
-    name='Poppins',
-    style='normal',
-    variant='normal',
-    weight=400,
-    stretch='normal',
-    size='scalable')
+    name='Poppins')
 )
 
 matplotlib.rcParams['font.family'] = 'Poppins'
