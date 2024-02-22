@@ -220,7 +220,7 @@ def radar_chart():
         subtitle_name_2=f"{takim2}\n{minute2}",
         subtitle_color_2=radar_renk2,
         title_fontsize=20,
-        subtitle_fontsize=10
+        subtitle_fontsize=8
     )
 
     radar = Radar(background_color="#121212", patch_color="#28252C", label_color="#FFFFFF",
