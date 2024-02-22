@@ -1,26 +1,30 @@
-from flask import Flask, render_template, request, jsonify, redirect, url_for, json
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import SelectField
 import pandas as pd
 from soccerplots.radar_chart import Radar
 import matplotlib
-import matplotlib.pyplot as plt, mpld3
+import matplotlib.pyplot as plt
 matplotlib.use('Agg')
 from io import BytesIO
 import base64
 from PIL import Image
 from mplsoccer import add_image
 from urllib.request import urlopen
-import matplotlib.font_manager as font_manager
-import os
 from matplotlib.font_manager import fontManager, FontEntry
 import requests
 
 custom_font_path = 'fonts/Poppins/Poppins-Medium.ttf'
+
 fontManager.ttflist.append(FontEntry(
     fname=custom_font_path,
-    name='Poppins')
-)
+    name='Poppins_Medium',
+    size='large',
+    style='normal',
+    variant='normal',
+    weight='normal',
+    stretch='normal'
+))
 
 app = Flask(__name__)
 app.secret_key = "FotMob_Radar"
@@ -220,11 +224,11 @@ def radar_chart():
         subtitle_name_2=f"{takim2}\n{minute2}",
         subtitle_color_2=radar_renk2,
         title_fontsize=20,
-        subtitle_fontsize=8
+        subtitle_fontsize=10
     )
 
-    radar = Radar(background_color="#121212", patch_color="#28252C", label_color="#FFFFFF",
-                    range_color="#FFFFFF", label_fontsize=9.5, range_fontsize=8.5, fontfamily="Poppins")
+    radar = Radar(background_color="#121212", patch_color="#28252C", label_color="#9D9E9C",
+                    range_color="#9D9E9C", label_fontsize=9.5, range_fontsize=8.5, fontfamily="Poppins_Medium")
     
     
     if selectedposition == 'FW':
@@ -233,7 +237,7 @@ def radar_chart():
     'Rakip Gol Bölgesinde\nİsabetli Pas', 'Zeminde Kazanılan\nİkili Mücadele', 'Kazanılan Hava\nTopu Mücadelesi', 'Kazanılan Toplam\nİkili Mücadele %', 'Kendisine Yapılan\nFaul'],
                                     values=values,
                                     radar_color=[radar_renk1, radar_renk2],
-                                    alphas=[0.65, 0.6], title=title, endnote=endnote,
+                                    alphas=[0.65, 0.6], title=title, endnote=endnote, image='static/sl_logo.png', image_coord=[0.4615, 0.95, 0.1, 0.075], end_color="#6e6c70",
                                     compare=True)
     if selectedposition == 'MF':
         fig, ax = radar.plot_radar(ranges=ranges, params=['Gol', 'Başarılı Top\nSürme', 'Başarılı Top\nSürme %', 'Toplam Şut', 'İsabetli Şut',
@@ -242,7 +246,7 @@ def radar_chart():
     'Kazanılan Toplam\nİkili Mücadele %', 'Kendisine Yapılan\nFaul'],
                                     values=values,
                                     radar_color=[radar_renk1, radar_renk2],
-                                    alphas=[0.65, 0.6], title=title, endnote=endnote,
+                                    alphas=[0.65, 0.6], title=title, endnote=endnote, image='static/sl_logo.png', image_coord=[0.4615, 0.95, 0.1, 0.075], end_color="#6e6c70",
                                     compare=True)
     if selectedposition == 'DF':
         fig, ax = radar.plot_radar(ranges=ranges, params=['Top Çalma', 'Pas Arası', 'Top Uzaklaştırma', 'İsabetli Pas', 'İsabetli Pas %',
@@ -250,7 +254,7 @@ def radar_chart():
     'Başarılı Top\nSürme', 'Zeminde Kazanılan\nİkili Mücadele', 'Kazanılan Hava\nTopu Mücadelesi', 'Kazanılan Toplam\nİkili Mücadele', 'Kazanılan Toplam\nİkili Mücadele %'],
                                     values=values,
                                     radar_color=[radar_renk1, radar_renk2],
-                                    alphas=[0.65, 0.6], title=title, endnote=endnote,
+                                    alphas=[0.65, 0.6], title=title, endnote=endnote, image='static/sl_logo.png', image_coord=[0.4615, 0.95, 0.1, 0.075], end_color="#6e6c70",
                                     compare=True)
         
     ax_image_1 = add_image(player1_foto, fig=fig, left=0.310, bottom=0.940, width=0.1, height=0.1, interpolation='hanning')
