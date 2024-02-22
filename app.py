@@ -25,7 +25,8 @@ fontManager.ttflist.append(FontEntry(
     stretch='normal',
     size='scalable')
 )
-plt.rcParams['font.family'] = 'Poppins'
+
+matplotlib.rcParams['font.family'] = 'Poppins'
 
 app = Flask(__name__)
 app.secret_key = "FotMob_Radar"
@@ -200,7 +201,7 @@ def radar_chart():
     )
 
     radar = Radar(background_color="#121212", patch_color="#28252C", label_color="#FFFFFF",
-                    range_color="#FFFFFF", label_fontsize=9.5, range_fontsize=8.5)
+                    range_color="#FFFFFF", label_fontsize=9.5, range_fontsize=8.5, fontfamily="Poppins")
     
     
     if selectedposition == 'FW':
