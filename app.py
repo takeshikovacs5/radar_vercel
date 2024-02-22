@@ -14,9 +14,10 @@ from urllib.request import urlopen
 import matplotlib.font_manager as font_manager
 import os
 
-custom_font_path = 'fonts/Poppins/Poppins-ExtraLight.ttf'
+custom_font_path = 'fonts/Poppins/Poppins.ttf'
 custom_font_prop = font_manager.FontProperties(fname=custom_font_path)
-font_manager.fontManager.ttflist.extend([(custom_font_path, custom_font_prop.get_name())])
+font_entry = font_manager.FontEntry(custom_font_path, name=custom_font_prop.get_name())
+font_manager.fontManager.ttflist.extend([font_entry])
 plt.rcParams['font.family'] = custom_font_prop.get_name()
 
 print(f"Custom font path: {custom_font_path}")
