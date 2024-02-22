@@ -228,7 +228,7 @@ def radar_chart():
     )
 
     radar = Radar(background_color="#121212", patch_color="#28252C", label_color="#9D9E9C",
-                    range_color="#9D9E9C", label_fontsize=9.5, range_fontsize=8.5, fontfamily="Poppins_Medium")
+                    range_color="#9D9E9C", label_fontsize=9, range_fontsize=8.5, fontfamily="Poppins_Medium")
     
     
     if selectedposition == 'FW':
