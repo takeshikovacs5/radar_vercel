@@ -13,15 +13,28 @@ from mplsoccer import add_image
 from urllib.request import urlopen
 import matplotlib.font_manager as font_manager
 import os
+from matplotlib.font_manager import fontManager, FontEntry
 
 custom_font_path = 'fonts/Poppins/Poppins.ttf'
-custom_font_prop = font_manager.FontProperties(fname=custom_font_path)
-font_entry = font_manager.FontEntry(custom_font_path, name=custom_font_prop.get_name())
-font_manager.fontManager.ttflist.extend([font_entry])
-plt.rcParams['font.family'] = custom_font_prop.get_name()
-
-print(f"Custom font path: {custom_font_path}")
-print(f"Registered fonts: {font_manager.fontManager.ttflist}")
+fontManager.ttflist.append(FontEntry(
+    fname=custom_font_path,
+    name='Poppins',
+    style='normal',
+    variant='normal',
+    weight=400,
+    stretch='normal',
+    size='scalable')
+)
+fontManager.ttflist.extend(FontEntry(
+    fname=custom_font_path,
+    name='Poppins',
+    style='normal',
+    variant='normal',
+    weight=400,
+    stretch='normal',
+    size='scalable')
+)
+plt.rcParams['font.family'] = 'Poppins'
 
 app = Flask(__name__)
 app.secret_key = "FotMob_Radar"
