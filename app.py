@@ -15,7 +15,7 @@ import matplotlib.font_manager as font_manager
 import os
 from matplotlib.font_manager import fontManager, FontEntry
 
-custom_font_path = 'fonts/Poppins/Poppins.ttf'
+custom_font_path = 'fonts/Poppins/Poppins-Regular.ttf'
 fontManager.ttflist.append(FontEntry(
     fname=custom_font_path,
     name='Poppins')
@@ -192,7 +192,9 @@ def radar_chart():
         title_name_2=f"{player2}\n",
         title_color_2=radar_renk2,  # Set your color for player2
         subtitle_name_2=f"{takim2}\n{ligsezon}",
-        subtitle_color_2=radar_renk2
+        subtitle_color_2=radar_renk2,
+        title_fontsize=20,
+        subtitle_fontsize=10
     )
 
     radar = Radar(background_color="#121212", patch_color="#28252C", label_color="#FFFFFF",
