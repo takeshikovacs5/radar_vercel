@@ -14,9 +14,13 @@ from urllib.request import urlopen
 import matplotlib.font_manager as font_manager
 import os
 
-custom_font_path = os.path.join(os.getcwd(), 'fonts', 'Poppins', 'Poppins-ExtraLight.ttf')
+custom_font_path = 'fonts/Poppins/Poppins-ExtraLight.ttf'
 custom_font_prop = font_manager.FontProperties(fname=custom_font_path)
+font_manager.fontManager.ttflist.extend([(custom_font_path, custom_font_prop.get_name())])
 plt.rcParams['font.family'] = custom_font_prop.get_name()
+
+print(f"Custom font path: {custom_font_path}")
+print(f"Registered fonts: {font_manager.fontManager.ttflist}")
 
 app = Flask(__name__)
 app.secret_key = "FotMob_Radar"
