@@ -14,6 +14,7 @@ from urllib.request import urlopen
 import matplotlib.font_manager as font_manager
 import os
 from matplotlib.font_manager import fontManager, FontEntry
+import requests
 
 custom_font_path = 'fonts/Poppins/Poppins-Regular.ttf'
 fontManager.ttflist.append(FontEntry(
@@ -126,8 +127,7 @@ def radar_chart():
         team2name = player2_row['team.name']
         takim2 = team2name.iloc[0]
 
-    ligsezon = 'Süper Lig | 23/24'
-    endnote = '@bariscanyeksin\n90 dakika başına düşen verilerdir'
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
 
     fotmob_df_url = 'https://raw.githubusercontent.com/bariscanyeksin/csv_scatter_radar/main/fotmob_id.csv'
     fotmob_df = pd.read_csv(fotmob_df_url)
@@ -142,6 +142,16 @@ def radar_chart():
         r_player2 = urlopen(player2_fotmob_photo_url)
         player1_foto = Image.open(r_player1)
         player2_foto = Image.open(r_player2)
+        fotmob_player_url_1 = "https://www.fotmob.com/api/playerStats?playerId="+str(player1_fotmob_id)+"&seasonId=2023/2024-71"
+        min_response_1 = requests.get(fotmob_player_url_1, headers=headers)
+        min_data_json_1 = min_response_1.json()
+        minute_stats_1 = min_data_json_1["topStatCard"]["items"]
+        player_1_minute = minute_stats_1[5]["statValue"]
+        fotmob_player_url_2 = "https://www.fotmob.com/api/playerStats?playerId="+str(player2_fotmob_id)+"&seasonId=2023/2024-71"
+        min_response_2 = requests.get(fotmob_player_url_2, headers=headers)
+        min_data_json_2 = min_response_2.json()
+        minute_stats_2 = min_data_json_2["topStatCard"]["items"]
+        player_2_minute = minute_stats_2[5]["statValue"]
         
     elif (len(player1_fotmob) == 0) & (len(player2_fotmob) == 1):
         player2_fotmob_id = player2_fotmob[0]
@@ -151,6 +161,12 @@ def radar_chart():
         r_player2 = urlopen(player2_fotmob_photo_url)
         player1_foto = Image.open(r_player1)
         player2_foto = Image.open(r_player2)
+        player_1_minute = '-'
+        fotmob_player_url_2 = "https://www.fotmob.com/api/playerStats?playerId="+str(player2_fotmob_id)+"&seasonId=2023/2024-71"
+        min_response_2 = requests.get(fotmob_player_url_2, headers=headers)
+        min_data_json_2 = min_response_2.json()
+        minute_stats_2 = min_data_json_2["topStatCard"]["items"]
+        player_2_minute = minute_stats_2[5]["statValue"]
 
     elif (len(player1_fotmob) == 1) & (len(player2_fotmob) == 0):
         player1_fotmob_id = player1_fotmob[0]
@@ -160,6 +176,12 @@ def radar_chart():
         r_player2 = urlopen(player2_fotmob_photo_url)
         player1_foto = Image.open(r_player1)
         player2_foto = Image.open(r_player2)
+        fotmob_player_url_1 = "https://www.fotmob.com/api/playerStats?playerId="+str(player1_fotmob_id)+"&seasonId=2023/2024-71"
+        min_response_1 = requests.get(fotmob_player_url_1, headers=headers)
+        min_data_json_1 = min_response_1.json()
+        minute_stats_1 = min_data_json_1["topStatCard"]["items"]
+        player_1_minute = minute_stats_1[5]["statValue"]
+        player_2_minute = '-'
 
     else:
         player1_fotmob_photo_url = 'https://www.fotmob.com/_next/static/media/player_fallback_dark.2f00a83e.png'
@@ -168,6 +190,12 @@ def radar_chart():
         r_player2 = urlopen(player2_fotmob_photo_url)
         player1_foto = Image.open(r_player1)
         player2_foto = Image.open(r_player2)
+        player_1_minute = '-'
+        player_2_minute = '-'
+
+    minute1 = str(player_1_minute) + ' dk.'
+    minute2 = str(player_2_minute) + ' dk.'
+    endnote = '@bariscanyeksin\n90 dakika başına düşen verilerdir'
     
     df_filtered = df_filtered.drop(['index', 'team.name', 'team.shortName'], axis=1)
 
@@ -185,14 +213,14 @@ def radar_chart():
     title = dict(
         title_name=f"{player1}\n",
         title_color=radar_renk1,  # Set your color for player1
-        subtitle_name=f"{takim1}\n{ligsezon}",
+        subtitle_name=f"{takim1}\n{minute1}",
         subtitle_color=radar_renk1,
         title_name_2=f"{player2}\n",
         title_color_2=radar_renk2,  # Set your color for player2
-        subtitle_name_2=f"{takim2}\n{ligsezon}",
+        subtitle_name_2=f"{takim2}\n{minute2}",
         subtitle_color_2=radar_renk2,
         title_fontsize=20,
-        subtitle_fontsize=8,
+        subtitle_fontsize=10
     )
 
     radar = Radar(background_color="#121212", patch_color="#28252C", label_color="#FFFFFF",
