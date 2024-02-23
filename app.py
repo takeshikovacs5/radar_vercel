@@ -38,11 +38,11 @@ class PlayerSelectForm(FlaskForm):
 def index():
     selectedposition = request.form.get('position', 'FW')
     if selectedposition == 'FW':
-        csv_url = 'https://raw.githubusercontent.com/bariscanyeksin/csv_scatter_radar/main/forwards.csv'
+        csv_url = 'https://raw.githubusercontent.com/scatterradarcsv/csv_scatter_radar/main/forwards.csv'
     elif selectedposition == 'MF':
-        csv_url = 'https://raw.githubusercontent.com/bariscanyeksin/csv_scatter_radar/main/midfielders.csv'
+        csv_url = 'https://raw.githubusercontent.com/scatterradarcsv/csv_scatter_radar/main/midfielders.csv'
     elif selectedposition == 'DF':
-        csv_url = 'https://raw.githubusercontent.com/bariscanyeksin/csv_scatter_radar/main/defenders.csv'
+        csv_url = 'https://raw.githubusercontent.com/scatterradarcsv/csv_scatter_radar/main/defenders.csv'
     else:
     # Handle the case when an invalid position is selected
         print(f"Invalid position: {selectedposition}")
@@ -83,11 +83,11 @@ def radar_chart():
         return jsonify({'error': 'Invalid player names'})
     
     if selectedposition == 'FW':
-        csv_url = 'https://raw.githubusercontent.com/bariscanyeksin/csv_scatter_radar/main/forwards.csv'
+        csv_url = 'https://raw.githubusercontent.com/scatterradarcsv/csv_scatter_radar/main/forwards.csv'
     elif selectedposition == 'MF':
-        csv_url = 'https://raw.githubusercontent.com/bariscanyeksin/csv_scatter_radar/main/midfielders.csv'
+        csv_url = 'https://raw.githubusercontent.com/scatterradarcsv/csv_scatter_radar/main/midfielders.csv'
     elif selectedposition == 'DF':
-        csv_url = 'https://raw.githubusercontent.com/bariscanyeksin/csv_scatter_radar/main/defenders.csv'
+        csv_url = 'https://raw.githubusercontent.com/scatterradarcsv/csv_scatter_radar/main/defenders.csv'
     df = pd.read_csv(csv_url)
 
     # get parameters
@@ -133,7 +133,7 @@ def radar_chart():
 
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
 
-    fotmob_df_url = 'https://raw.githubusercontent.com/bariscanyeksin/csv_scatter_radar/main/fotmob_id.csv'
+    fotmob_df_url = 'https://raw.githubusercontent.com/scatterradarcsv/csv_scatter_radar/main/fotmob_id.csv'
     fotmob_df = pd.read_csv(fotmob_df_url)
     player1_fotmob = fotmob_df.loc[fotmob_df['player_name'] == player1, 'fotmob_id'].values
     player2_fotmob = fotmob_df.loc[fotmob_df['player_name'] == player2, 'fotmob_id'].values
