@@ -110,6 +110,8 @@ def radar_chart():
     player1_row = df_filtered[(df_filtered['player.name'] == player1)].reset_index()
     player2_row = df_filtered[(df_filtered['player.name'] == player2)].reset_index()
 
+    team1name = player1_row['team.name']
+    team1shortname = player1_row['team.shortName']
     if team1name.isnull().values.any() == True:
         takim1 = team1shortname.iloc[0]
     elif team1shortname.isnull().values.any() == True:
