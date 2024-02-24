@@ -110,25 +110,16 @@ def radar_chart():
     player1_row = df_filtered[(df_filtered['player.name'] == player1)].reset_index()
     player2_row = df_filtered[(df_filtered['player.name'] == player2)].reset_index()
 
-    if ((selectedposition == 'MF') | (selectedposition == 'DF')):
-        team1name = player1_row['team.name']
-        team1shortname = player1_row['team.shortName']
-        if team1name.isnull().values.any() == True:
-            takim1 = team1shortname.iloc[0]
-        elif team1shortname.isnull().values.any() == True:
-            takim1 = team1name.iloc[0]
-
-        team2name = player2_row['team.name']
-        team2shortname = player2_row['team.shortName']
-        if team2name.isnull().values.any() == True:
-            takim2 = team2shortname.iloc[0]
-        elif team2shortname.isnull().values.any() == True:
-            takim2 = team2name.iloc[0]
-        
-    elif selectedposition == 'FW':
-        team1name = player1_row['team.name']
+    if team1name.isnull().values.any() == True:
+        takim1 = team1shortname.iloc[0]
+    elif team1shortname.isnull().values.any() == True:
         takim1 = team1name.iloc[0]
-        team2name = player2_row['team.name']
+
+    team2name = player2_row['team.name']
+    team2shortname = player2_row['team.shortName']
+    if team2name.isnull().values.any() == True:
+        takim2 = team2shortname.iloc[0]
+    elif team2shortname.isnull().values.any() == True:
         takim2 = team2name.iloc[0]
 
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
