@@ -194,21 +194,25 @@ input[type="submit"]:active {
 @media only screen and (max-width: 600px) {
     .container {
         padding: 10px;
+        font-family: 'Poppins', sans-serif;
     }
 
     h1 {
         font-size: 24px;
+        font-family: 'Poppins', sans-serif;
     }
 
     select,
     input[type="radio"],
     input[type="submit"] {
         font-size: 12px;
+        font-family: 'Poppins', sans-serif;
     }
 
     select {
         width: 150px;
         padding: 8px;
+        font-family: 'Poppins', sans-serif;
     }
 
     #chartContainer{
