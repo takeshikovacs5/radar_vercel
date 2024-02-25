@@ -24,6 +24,7 @@ body {
     overflow: hidden; /* Prevent unexpected layout shifts */
     max-width: 100%; /* Adjust as needed */
     margin: 0 auto;  /* Center the container */
+    font-family: 'Poppins', sans-serif;
 }
 
 form {
@@ -35,6 +36,7 @@ form {
     margin-right: 0;
     margin-bottom: 20px;
     z-index: 1;
+    font-family: 'Poppins', sans-serif;
 }
 
 h1 {
@@ -49,6 +51,7 @@ input[type="radio"] {
     border: 1px solid #ccc;
     border-radius: 5px;
     outline: none;
+    font-family: 'Poppins', sans-serif;
 }
 
 input[type="radio"] {
@@ -64,6 +67,7 @@ input[type="radio"] + label {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.5s ease, color 0.5s ease; /* Added color transition */
+    font-family: 'Poppins', sans-serif;
 }
 
 input[type="radio"]:checked + label {
@@ -71,12 +75,14 @@ input[type="radio"]:checked + label {
     color: #009A57;
     border: 1px solid #009A57;
     border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
 }
 
 input[type="radio"]:hover + label:hover {
     background-color: #103023;
     color: #29a372;
     transition: background-color 0.5s ease, color 0.5s ease; /* Added color transition */
+    font-family: 'Poppins', sans-serif;
 }
 
 
@@ -89,10 +95,12 @@ input[type="radio"]:hover + label:hover {
 .radio-group input[type="radio"] {
     margin-right: 0;
     margin-left: 0; /* Add this line to reset left margin */
+    font-family: 'Poppins', sans-serif;
 }
 
 .radio-group label {
     margin-left: 0; /* Add this line to create space between radio button and label */
+    font-family: 'Poppins', sans-serif;
 }
 
 .select-group {
@@ -140,6 +148,7 @@ select::-ms-expand {
     height: auto; /* Maintain aspect ratio */
     text-align: center; /*Set maximum width to the viewport width */
     overflow: hidden; /* Hide any content that overflows */
+    font-family: 'Poppins', sans-serif;
 }
 
 #chartImage {
@@ -150,10 +159,12 @@ select::-ms-expand {
     cursor: pointer; /* Add a pointer cursor to indicate clickability */
     position: absolute;
     right: 0; left: 0;
+    font-family: 'Poppins', sans-serif;
 }
 
 .submit_button{
     margin-top: 20px;
+    font-family: 'Poppins', sans-serif;
 }
 
 .select-group{
@@ -168,7 +179,6 @@ input[type="submit"] {
     border: 2px solid #009A57;
     border-radius: 6px;
     cursor: pointer;
-    font-family: 'Poppins';
     font-size: 16px;
     font-weight: 450;
     line-height: 16px;
@@ -178,6 +188,7 @@ input[type="submit"] {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Added color and border transition */
     position: relative; /* Set position to relative */
     z-index: 1;
+    font-family: 'Poppins', sans-serif;
 }
 
 input[type="submit"]:hover {
