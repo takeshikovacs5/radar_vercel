@@ -116,6 +116,8 @@ def radar_chart():
         takim1 = team1shortname.iloc[0]
     elif team1shortname.isnull().values.any() == True:
         takim1 = team1name.iloc[0]
+    else:
+        takim1 = '-'
 
     team2name = player2_row['team.name']
     team2shortname = player2_row['team.shortName']
@@ -123,6 +125,8 @@ def radar_chart():
         takim2 = team2shortname.iloc[0]
     elif team2shortname.isnull().values.any() == True:
         takim2 = team2name.iloc[0]
+    else:
+        takim2 = '-'
 
     headers = {
     'sec-ch-ua': '"Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"',
