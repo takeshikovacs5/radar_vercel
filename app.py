@@ -145,16 +145,30 @@ def radar_chart():
         r_player2 = urlopen(player2_fotmob_photo_url)
         player1_foto = Image.open(r_player1)
         player2_foto = Image.open(r_player2)
-        fotmob_player_url_1 = "https://www.fotmob.com/api/playerStats?playerId="+str(player1_fotmob_id)+"&seasonId=2023/2024-71"
-        min_response_1 = requests.get(fotmob_player_url_1, headers=headers)
+        fotmob_playerdata_url_1 = "https://www.fotmob.com/api/playerData?id="+str(player1_fotmob_id)
+        min_response_1 = requests.get(fotmob_playerdata_url_1, headers=headers)
         min_data_json_1 = min_response_1.json()
-        minute_stats_1 = min_data_json_1["topStatCard"]["items"]
-        player_1_minute = minute_stats_1[5]["statValue"]
-        fotmob_player_url_2 = "https://www.fotmob.com/api/playerStats?playerId="+str(player2_fotmob_id)+"&seasonId=2023/2024-71"
-        min_response_2 = requests.get(fotmob_player_url_2, headers=headers)
+        fotmob_playerstats_url_1 = "https://www.fotmob.com/api/playerStats?playerId="+str(player1_fotmob_id)+"&seasonId=2023/2024-71"
+        playerstats_response_1 = requests.get(fotmob_playerstats_url_1, headers=headers)
+        playerstats_json_1 = playerstats_response_1.json()
+        if len(playerstats_json_1['topStatCard']['items']) > 0:
+            player_1_minute = playerstats_json_1['topStatCard']['items'][5]['statValue']
+        elif min_data_json_1['mainLeague']['leagueId'] == 71:
+            player_1_minute = min_data_json_1['mainLeague']['stats'][4]['value']
+        else:
+            player_1_minute = '-'
+        fotmob_playerdata_url_2 = "https://www.fotmob.com/api/playerData?id="+str(player2_fotmob_id)
+        min_response_2 = requests.get(fotmob_playerdata_url_2, headers=headers)
         min_data_json_2 = min_response_2.json()
-        minute_stats_2 = min_data_json_2["topStatCard"]["items"]
-        player_2_minute = minute_stats_2[5]["statValue"]
+        fotmob_playerstats_url_2 = "https://www.fotmob.com/api/playerStats?playerId="+str(player2_fotmob_id)+"&seasonId=2023/2024-71"
+        playerstats_response_2 = requests.get(fotmob_playerstats_url_2, headers=headers)
+        playerstats_json_2 = playerstats_response_2.json()
+        if len(playerstats_json_2['topStatCard']['items']) > 0:
+            player_2_minute = playerstats_json_2['topStatCard']['items'][5]['statValue']
+        elif min_data_json_2['mainLeague']['leagueId'] == 71:
+            player_2_minute = min_data_json_2['mainLeague']['stats'][4]['value']
+        else:
+            player_2_minute = '-'
         
     elif (len(player1_fotmob) == 0) & (len(player2_fotmob) == 1):
         player2_fotmob_id = player2_fotmob[0]
@@ -165,11 +179,18 @@ def radar_chart():
         player1_foto = Image.open(r_player1)
         player2_foto = Image.open(r_player2)
         player_1_minute = '-'
-        fotmob_player_url_2 = "https://www.fotmob.com/api/playerStats?playerId="+str(player2_fotmob_id)+"&seasonId=2023/2024-71"
-        min_response_2 = requests.get(fotmob_player_url_2, headers=headers)
+        fotmob_playerdata_url_2 = "https://www.fotmob.com/api/playerData?id="+str(player2_fotmob_id)
+        min_response_2 = requests.get(fotmob_playerdata_url_2, headers=headers)
         min_data_json_2 = min_response_2.json()
-        minute_stats_2 = min_data_json_2["topStatCard"]["items"]
-        player_2_minute = minute_stats_2[5]["statValue"]
+        fotmob_playerstats_url_2 = "https://www.fotmob.com/api/playerStats?playerId="+str(player2_fotmob_id)+"&seasonId=2023/2024-71"
+        playerstats_response_2 = requests.get(fotmob_playerstats_url_2, headers=headers)
+        playerstats_json_2 = playerstats_response_2.json()
+        if len(playerstats_json_2['topStatCard']['items']) > 0:
+            player_2_minute = playerstats_json_2['topStatCard']['items'][5]['statValue']
+        elif min_data_json_2['mainLeague']['leagueId'] == 71:
+            player_2_minute = min_data_json_2['mainLeague']['stats'][4]['value']
+        else:
+            player_2_minute = '-'
 
     elif (len(player1_fotmob) == 1) & (len(player2_fotmob) == 0):
         player1_fotmob_id = player1_fotmob[0]
@@ -179,11 +200,18 @@ def radar_chart():
         r_player2 = urlopen(player2_fotmob_photo_url)
         player1_foto = Image.open(r_player1)
         player2_foto = Image.open(r_player2)
-        fotmob_player_url_1 = "https://www.fotmob.com/api/playerStats?playerId="+str(player1_fotmob_id)+"&seasonId=2023/2024-71"
-        min_response_1 = requests.get(fotmob_player_url_1, headers=headers)
+        fotmob_playerdata_url_1 = "https://www.fotmob.com/api/playerData?id="+str(player1_fotmob_id)
+        min_response_1 = requests.get(fotmob_playerdata_url_1, headers=headers)
         min_data_json_1 = min_response_1.json()
-        minute_stats_1 = min_data_json_1["topStatCard"]["items"]
-        player_1_minute = minute_stats_1[5]["statValue"]
+        fotmob_playerstats_url_1 = "https://www.fotmob.com/api/playerStats?playerId="+str(player1_fotmob_id)+"&seasonId=2023/2024-71"
+        playerstats_response_1 = requests.get(fotmob_playerstats_url_1, headers=headers)
+        playerstats_json_1 = playerstats_response_1.json()
+        if len(playerstats_json_1['topStatCard']['items']) > 0:
+            player_1_minute = playerstats_json_1['topStatCard']['items'][5]['statValue']
+        elif min_data_json_1['mainLeague']['leagueId'] == 71:
+            player_1_minute = min_data_json_1['mainLeague']['stats'][4]['value']
+        else:
+            player_1_minute = '-'
         player_2_minute = '-'
 
     else:
