@@ -124,7 +124,13 @@ def radar_chart():
     elif team2shortname.isnull().values.any() == True:
         takim2 = team2name.iloc[0]
 
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'}
+    headers = {
+    'sec-ch-ua': '"Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"',
+    'Referer': 'https://www.fotmob.com/',
+    'sec-ch-ua-mobile': '?0',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+    'sec-ch-ua-platform': '"Windows"',
+}
 
     fotmob_df_url = 'https://raw.githubusercontent.com/scatterradarcsv/csv_scatter_radar/main/fotmob_id.csv'
     fotmob_df = pd.read_csv(fotmob_df_url)
