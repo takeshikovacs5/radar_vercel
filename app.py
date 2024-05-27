@@ -106,9 +106,9 @@ def radar_chart():
 
         ranges.append((a, b))
 
-    df_filtered = df[(df['player.name'] == player1) | (df['player.name'] == player2)]
-    player1_row = df_filtered[(df_filtered['player.name'] == player1)]
-    player2_row = df_filtered[(df_filtered['player.name'] == player2)]
+    df_filtered = df[(df['player.name'] == player1) | (df['player.name'] == player2)].reset_index()
+    player1_row = df_filtered[(df_filtered['player.name'] == player1)].reset_index()
+    player2_row = df_filtered[(df_filtered['player.name'] == player2)].reset_index()
 
     team1name = player1_row['team.name']
     team1shortname = player1_row['team.shortName']
