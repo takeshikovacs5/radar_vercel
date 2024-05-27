@@ -110,30 +110,23 @@ def radar_chart():
     player1_row = df_filtered[(df_filtered['player.name'] == player1)].reset_index()
     player2_row = df_filtered[(df_filtered['player.name'] == player2)].reset_index()
 
-    if selectedposition == 'FW':
-        team1name = player1_row['team.name']
-        team2name = player2_row['team.name']
+    team1name = player1_row['team.name']
+    team1shortname = player1_row['team.shortName']
+    if team1name.isnull().values.any() == True:
+        takim1 = team1shortname.iloc[0]
+    elif team1shortname.isnull().values.any() == True:
         takim1 = team1name.iloc[0]
-        takim2 = team2name.iloc[0]
-
     else:
-        team1name = player1_row['team.name']
-        team1shortname = player1_row['team.shortName']
-        if team1name.isnull().values.any() == True:
-            takim1 = team1shortname.iloc[0]
-        elif team1shortname.isnull().values.any() == True:
-            takim1 = team1name.iloc[0]
-        else:
-            takim1 = '-'
-    
-        team2name = player2_row['team.name']
-        team2shortname = player2_row['team.shortName']
-        if team2name.isnull().values.any() == True:
-            takim2 = team2shortname.iloc[0]
-        elif team2shortname.isnull().values.any() == True:
-            takim2 = team2name.iloc[0]
-        else:
-            takim2 = '-'
+        takim1 = '-'
+
+    team2name = player2_row['team.name']
+    team2shortname = player2_row['team.shortName']
+    if team2name.isnull().values.any() == True:
+        takim2 = team2shortname.iloc[0]
+    elif team2shortname.isnull().values.any() == True:
+        takim2 = team2name.iloc[0]
+    else:
+        takim2 = '-'
 
     headers = {
     'sec-ch-ua': '"Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"',
