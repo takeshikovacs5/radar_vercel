@@ -110,7 +110,7 @@ def radar_chart():
     player1_row = df_filtered[(df_filtered['player.name'] == player1)].reset_index()
     player2_row = df_filtered[(df_filtered['player.name'] == player2)].reset_index()
 
-    if 'forwards' in csv_url:
+    if selectedposition == 'FW':
         team1name = player1_row['team.name']
         team2name = player2_row['team.name']
         takim1 = team1name.iloc[0]
