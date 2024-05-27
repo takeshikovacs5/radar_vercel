@@ -106,25 +106,25 @@ def radar_chart():
 
         ranges.append((a, b))
 
-    df_filtered = df[(df['player.name'] == player1) | (df['player.name'] == player2)].reset_index()
-    player1_row = df_filtered[(df_filtered['player.name'] == player1)].reset_index()
-    player2_row = df_filtered[(df_filtered['player.name'] == player2)].reset_index()
+    df_filtered = df[(df['player.name'] == player1) | (df['player.name'] == player2)]
+    player1_row = df_filtered[(df_filtered['player.name'] == player1)]
+    player2_row = df_filtered[(df_filtered['player.name'] == player2)]
 
     team1name = player1_row['team.name']
     team1shortname = player1_row['team.shortName']
-    if team1name.isnull().values.any() == True:
-        takim1 = team1shortname.iloc[0]
-    elif team1shortname.isnull().values.any() == True:
+    if team1name.isnull().values.any() == False:
         takim1 = team1name.iloc[0]
+    elif team1shortname.isnull().values.any() == False:
+        takim1 = team1shortname.iloc[0]
     else:
         takim1 = '-'
 
     team2name = player2_row['team.name']
     team2shortname = player2_row['team.shortName']
-    if team2name.isnull().values.any() == True:
-        takim2 = team2shortname.iloc[0]
-    elif team2shortname.isnull().values.any() == True:
+    if team2name.isnull().values.any() == False:
         takim2 = team2name.iloc[0]
+    elif team2shortname.isnull().values.any() == False:
+        takim2 = team2shortname.iloc[0]
     else:
         takim2 = '-'
 
