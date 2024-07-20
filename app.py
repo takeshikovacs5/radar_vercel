@@ -153,9 +153,6 @@ def radar_chart():
         leagueId = option['value'] if option else "0-0"
         return leagueId
 
-    player1_season_id = getSeasonId(player1_fotmob_id)
-    player2_season_id = getSeasonId(player2_fotmob_id)
-
     headers = {
     'sec-ch-ua': '"Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"',
     'Referer': 'https://www.fotmob.com/',
@@ -180,6 +177,7 @@ def radar_chart():
         fotmob_playerdata_url_1 = "https://www.fotmob.com/api/playerData?id="+str(player1_fotmob_id)
         min_response_1 = requests.get(fotmob_playerdata_url_1, headers=headers)
         min_data_json_1 = min_response_1.json()
+        player1_season_id = getSeasonId(player1_fotmob_id)
         fotmob_playerstats_url_1 = "https://www.fotmob.com/api/playerStats?playerId="+str(player1_fotmob_id)+"&seasonId="+str(player1_season_id)
         playerstats_response_1 = requests.get(fotmob_playerstats_url_1, headers=headers)
         playerstats_json_1 = playerstats_response_1.json()
@@ -192,6 +190,7 @@ def radar_chart():
         fotmob_playerdata_url_2 = "https://www.fotmob.com/api/playerData?id="+str(player2_fotmob_id)
         min_response_2 = requests.get(fotmob_playerdata_url_2, headers=headers)
         min_data_json_2 = min_response_2.json()
+        player2_season_id = getSeasonId(player2_fotmob_id)
         fotmob_playerstats_url_2 = "https://www.fotmob.com/api/playerStats?playerId="+str(player2_fotmob_id)+"&seasonId="+str(player2_season_id)
         playerstats_response_2 = requests.get(fotmob_playerstats_url_2, headers=headers)
         playerstats_json_2 = playerstats_response_2.json()
@@ -214,7 +213,8 @@ def radar_chart():
         fotmob_playerdata_url_2 = "https://www.fotmob.com/api/playerData?id="+str(player2_fotmob_id)
         min_response_2 = requests.get(fotmob_playerdata_url_2, headers=headers)
         min_data_json_2 = min_response_2.json()
-        fotmob_playerstats_url_2 = "https://www.fotmob.com/api/playerStats?playerId="+str(player2_fotmob_id)+"&seasonId=2023/2024-71"
+        player2_season_id = getSeasonId(player2_fotmob_id)
+        fotmob_playerstats_url_2 = "https://www.fotmob.com/api/playerStats?playerId="+str(player2_fotmob_id)+"&seasonId="+str(player2_season_id)
         playerstats_response_2 = requests.get(fotmob_playerstats_url_2, headers=headers)
         playerstats_json_2 = playerstats_response_2.json()
         if len(playerstats_json_2['topStatCard']['items']) > 0:
@@ -235,7 +235,8 @@ def radar_chart():
         fotmob_playerdata_url_1 = "https://www.fotmob.com/api/playerData?id="+str(player1_fotmob_id)
         min_response_1 = requests.get(fotmob_playerdata_url_1, headers=headers)
         min_data_json_1 = min_response_1.json()
-        fotmob_playerstats_url_1 = "https://www.fotmob.com/api/playerStats?playerId="+str(player1_fotmob_id)+"&seasonId=2023/2024-71"
+        player1_season_id = getSeasonId(player1_fotmob_id)
+        fotmob_playerstats_url_1 = "https://www.fotmob.com/api/playerStats?playerId="+str(player1_fotmob_id)+"&seasonId="+str(player1_season_id)
         playerstats_response_1 = requests.get(fotmob_playerstats_url_1, headers=headers)
         playerstats_json_1 = playerstats_response_1.json()
         if len(playerstats_json_1['topStatCard']['items']) > 0:
