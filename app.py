@@ -13,6 +13,7 @@ from mplsoccer import add_image
 from urllib.request import urlopen
 from matplotlib.font_manager import fontManager, FontEntry
 import requests
+from bs4 import BeautifulSoup
 
 custom_font_path = 'fonts/Poppins/Poppins-Medium.ttf'
 
