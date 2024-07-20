@@ -128,6 +128,34 @@ def radar_chart():
     else:
         takim2 = '-'
 
+    def getSeasonId(playerId):
+    headers3 = {
+        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+        'accept-language': 'tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7',
+        'cache-control': 'max-age=0',
+        'if-none-match': '"a9fufto5gfhvxm"',
+        'priority': 'u=0, i',
+        'sec-ch-ua': '"Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': '"Windows"',
+        'sec-fetch-dest': 'document',
+        'sec-fetch-mode': 'navigate',
+        'sec-fetch-site': 'same-origin',
+        'sec-fetch-user': '?1',
+        'upgrade-insecure-requests': '1',
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
+        }
+
+    response3 = requests.get('https://www.fotmob.com/tr/players/'+str(playerId)+'/', headers=headers3)
+    soup = BeautifulSoup(response3.text, 'html.parser')
+    # 2023/2024 sezonundaki Super Lig seçeneğinin value değerini bul
+    option = soup.find('optgroup', {'label': '2023/2024'}).find('option', string='Super Lig')
+    leagueId = option['value'] if option else "0-0"
+    return leagueId
+
+    player1_season_id = getSeasonId(player1_fotmob_id)
+    player2_season_id = getSeasonId(player2_fotmob_id)
+
     headers = {
     'sec-ch-ua': '"Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"',
     'Referer': 'https://www.fotmob.com/',
@@ -152,7 +180,7 @@ def radar_chart():
         fotmob_playerdata_url_1 = "https://www.fotmob.com/api/playerData?id="+str(player1_fotmob_id)
         min_response_1 = requests.get(fotmob_playerdata_url_1, headers=headers)
         min_data_json_1 = min_response_1.json()
-        fotmob_playerstats_url_1 = "https://www.fotmob.com/api/playerStats?playerId="+str(player1_fotmob_id)+"&seasonId=2023/2024-71"
+        fotmob_playerstats_url_1 = "https://www.fotmob.com/api/playerStats?playerId="+str(player1_fotmob_id)+"&seasonId="+str(player1_season_id)
         playerstats_response_1 = requests.get(fotmob_playerstats_url_1, headers=headers)
         playerstats_json_1 = playerstats_response_1.json()
         if len(playerstats_json_1['topStatCard']['items']) > 0:
@@ -164,7 +192,7 @@ def radar_chart():
         fotmob_playerdata_url_2 = "https://www.fotmob.com/api/playerData?id="+str(player2_fotmob_id)
         min_response_2 = requests.get(fotmob_playerdata_url_2, headers=headers)
         min_data_json_2 = min_response_2.json()
-        fotmob_playerstats_url_2 = "https://www.fotmob.com/api/playerStats?playerId="+str(player2_fotmob_id)+"&seasonId=2023/2024-71"
+        fotmob_playerstats_url_2 = "https://www.fotmob.com/api/playerStats?playerId="+str(player2_fotmob_id)+"&seasonId="+str(player2_season_id)
         playerstats_response_2 = requests.get(fotmob_playerstats_url_2, headers=headers)
         playerstats_json_2 = playerstats_response_2.json()
         if len(playerstats_json_2['topStatCard']['items']) > 0:
